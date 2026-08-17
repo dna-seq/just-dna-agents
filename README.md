@@ -189,12 +189,23 @@ For a packaged MCP setup, configure Cursor to run:
 
 ### Codex
 
-Add to your Codex MCP server configuration:
+**Recommended: install the guided workflow plugin from the DNA Seq marketplace.**
+It includes the `create-module` skill, the annotation MCP server, and BioContext KB:
+
+```bash
+codex plugin marketplace add dna-seq/dna-seq-claude-marketplace
+codex plugin add just-dna-agents@dna-seq
+```
+
+Start a new task after installation. Choose `create-module` from Codex's skill or
+slash-command picker, or invoke it explicitly as `$create-module`.
+
+**Tools only:** add the MCP server directly to your Codex configuration:
 
 ```toml
 [mcp_servers.just-dna-agents-mcp]
 command = "uvx"
-args = ["just-dna-agents-mcp", "serve", "--transport", "stdio"]
+args = ["just-dna-agents-mcp@0.4.0", "serve", "--transport", "stdio"]
 ```
 
 ### Antigravity / other MCP clients

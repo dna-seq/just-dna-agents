@@ -1,0 +1,54 @@
+{
+  "name": "just-dna-agents",
+  "version": "0.4.0",
+  "description": "Research, validate, and compile genetics annotation modules with evidence-aware genomics workflows.",
+  "author": {
+    "name": "DNA Seq",
+    "url": "https://github.com/dna-seq"
+  },
+  "homepage": "https://github.com/dna-seq/just-dna-agents",
+  "repository": "https://github.com/dna-seq/just-dna-agents",
+  "license": "MIT",
+  "keywords": [
+    "genomics",
+    "variant-annotation",
+    "pharmacogenomics",
+    "polygenic-score",
+    "bioinformatics"
+  ],
+  "skills": "./skills/",
+  "mcpServers": {
+    "just-dna-agents-mcp": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "just-dna-agents-mcp@0.4.0",
+        "serve",
+        "--transport",
+        "stdio"
+      ]
+    },
+    "biocontext-kb": {
+      "type": "streamable-http",
+      "url": "https://biocontext-kb.fastmcp.app/mcp"
+    }
+  },
+  "interface": {
+    "displayName": "just-dna Genetics Annotation",
+    "shortDescription": "Research and compile genetics modules",
+    "longDescription": "Research evidence, author research-use genetics annotation specs, validate them, and compile deployable just-dna modules.",
+    "developerName": "DNA Seq",
+    "category": "Research",
+    "capabilities": [
+      "Research",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/dna-seq/just-dna-agents",
+    "brandColor": "#6435C9",
+    "defaultPrompt": [
+      "Create a research-use genetics annotation module from these sources.",
+      "Assess whether this paper contains extractable variant evidence.",
+      "Validate and compile this module spec."
+    ]
+  }
+}

@@ -11,12 +11,12 @@ alleles, and verify every PMID through EuropePMC.
 
 ## Route the request
 
-- Unclear paper or topic: delegate to `paper-scout`.
-- Individual variant associations: delegate to `module-creator`.
-- PGS Catalog score selection: delegate to `pgs-module-creator`.
-- Star-allele pharmacogenomics: delegate to `pgx-module-creator`.
-- High-stakes SNP requests: delegate parallel `researcher` agents, then
-  `reviewer` before authoring.
+- Unclear paper or topic: first assess whether it contains extractable variant evidence.
+- Individual variant associations: use the `$create-module` workflow.
+- PGS Catalog score selection: use `just-prs` rather than reducing a score to SNP claims.
+- Star-allele pharmacogenomics: preserve the guideline's allele definitions and provenance.
+- High-stakes SNP requests: perform independent research and review passes before authoring.
+  Use delegated agents in parallel when available, or run the passes sequentially.
 
 ## Non-negotiable constraints
 
@@ -27,5 +27,4 @@ alleles, and verify every PMID through EuropePMC.
 - Use real, topic-matched PMIDs only.
 - Call `get_spec_format` before authoring and `validate_spec` before completion.
 
-The specialized agents contain the authoritative detailed workflows. Keep
-runtime schema validation as the final source of truth.
+Keep runtime schema validation as the final source of truth.

@@ -1,4 +1,4 @@
-"""Smoke tests for the distributable Claude Code plugin surface."""
+"""Smoke tests for the distributable Claude Code and Codex plugin surfaces."""
 
 import json
 from pathlib import Path
@@ -56,3 +56,24 @@ def test_plugin_command_and_skill_files_are_present() -> None:
         "create-pgx-module",
     } <= commands
     assert (REPO_ROOT / "skills" / "module-authoring" / "SKILL.md").is_file()
+    assert (REPO_ROOT / "skills" / "create-module" / "SKILL.md").is_file()
+    assert (REPO_ROOT / "skills" / "create-module" / "agents" / "openai.yaml").is_file()
+
+
+def test_codex_plugin_declares_skills_and_published_runtime() -> None:
+    manifest = _read_json(REPO_ROOT / ".codex-plugin" / "plugin.json")
+    claude_manifest = _read_json(REPO_ROOT / ".claude-plugin" / "plugin.json")
+
+    assert manifest["name"] == "just-dna-agents"
+    assert manifest["version"] == claude_manifest["version"]
+    assert manifest["skills"] == "./skills/"
+
+    servers = manifest["mcpServers"]
+    assert isinstance(servers, dict)
+    annotation_server = servers["just-dna-agents-mcp"]
+    assert annotation_server["type"] == "stdio"
+    assert annotation_server["args"][0] == f"just-dna-agents-mcp@{manifest['version']}"
+    assert servers["biocontext-kb"] == {
+        "type": "streamable-http",
+        "url": "https://biocontext-kb.fastmcp.app/mcp",
+    }
