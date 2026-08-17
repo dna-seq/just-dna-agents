@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create just-dna Module"
+  short_description: "Author and validate genetics annotation modules"
+  default_prompt: "Use $create-module to create a research-use just-dna annotation module from evidence."
